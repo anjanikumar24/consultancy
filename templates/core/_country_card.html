@@ -1,0 +1,9 @@
+<article class="card h-100 p-4 country-card">
+  <div class="d-flex align-items-center gap-3">
+    <span class="flag-tile" aria-hidden="true">{{ d.flag }}</span>
+    <h3 class="h5 fw-bold mb-0">{{ d.name }}</h3>
+  </div>
+  <p class="small text-secondary mt-3 mb-2">{{ d.intro }}</p>
+  {% if d.intakes %}<p class="small mb-3"><strong>Typical intakes:</strong> {{ d.intakes }}</p>{% endif %}
+  <a class="mt-auto fw-semibold link-teal" href="{% url 'contact' %}?country={{ d.name|urlencode }}">Ask about {{ d.name }} <span aria-hidden="true">&rarr;</span></a>
+</article>

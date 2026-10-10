@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5">
+  <div class="container-xl">
+    <div class="accordion col-lg-9 px-0" id="faqAccordion">
+      {% for f in faqs %}
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ f.pk }}" aria-expanded="false" aria-controls="faq{{ f.pk }}">{{ f.question }}</button>
+        </h2>
+        <div id="faq{{ f.pk }}" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body text-secondary">{{ f.answer }}</div>
+        </div>
+      </div>
+      {% empty %}<p class="text-secondary">No questions published yet.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

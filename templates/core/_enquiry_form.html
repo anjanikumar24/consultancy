@@ -1,0 +1,47 @@
+<form method="post" action="{% url 'contact' %}" class="card p-4 enquiry-form" novalidate data-enquiry-form aria-labelledby="form-title">
+  {% csrf_token %}
+  <h2 id="form-title" class="h4 fw-bold mb-3">{{ form_title }}</h2>
+  {% if form.non_field_errors %}<div class="alert alert-danger" role="alert">{% for e in form.non_field_errors %}<div>{{ e }}</div>{% endfor %}</div>{% endif %}
+  {% if form.errors and not form.non_field_errors %}<div class="alert alert-danger" role="alert">Please correct the highlighted fields.</div>{% endif %}
+  {{ form.enquiry_type }}
+  <div class="row g-3">
+    <div class="{% if compact %}col-12{% else %}col-md-6{% endif %}">
+      <label class="form-label" for="{{ form.name.id_for_label }}">Full name</label>
+      {{ form.name }}
+      <div class="invalid-feedback">{% if form.name.errors %}{{ form.name.errors.0 }}{% else %}Please enter your full name.{% endif %}</div>
+    </div>
+    <div class="{% if compact %}col-12{% else %}col-md-6{% endif %}">
+      <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+      {{ form.email }}
+      <div class="invalid-feedback">{% if form.email.errors %}{{ form.email.errors.0 }}{% else %}Enter a valid email address.{% endif %}</div>
+    </div>
+    <div class="{% if compact %}col-12{% else %}col-md-6{% endif %}">
+      <label class="form-label" for="{{ form.phone.id_for_label }}">Phone / WhatsApp</label>
+      {{ form.phone }}
+      <div class="invalid-feedback">{% if form.phone.errors %}{{ form.phone.errors.0 }}{% else %}Enter a valid phone number, e.g. +91 98765 43210.{% endif %}</div>
+    </div>
+    <div class="{% if compact %}col-6{% else %}col-md-3{% endif %}">
+      <label class="form-label" for="{{ form.country_interest.id_for_label }}">Preferred country</label>
+      {{ form.country_interest }}
+    </div>
+    <div class="{% if compact %}col-6{% else %}col-md-3{% endif %}">
+      <label class="form-label" for="{{ form.study_level.id_for_label }}">Study level</label>
+      {{ form.study_level }}
+    </div>
+    <div class="col-12">
+      <label class="form-label" for="{{ form.message.id_for_label }}">Message (optional)</label>
+      {{ form.message }}
+      <div class="form-text">Tell us about your course interests, timeline or questions.</div>
+      <div class="invalid-feedback">{{ form.message.errors.0 }}</div>
+    </div>
+    <div class="hp" aria-hidden="true"><label>Website {{ form.website }}</label></div>
+    <div class="col-12">
+      <div class="form-check">
+        {{ form.consent }}
+        <label class="form-check-label" for="{{ form.consent.id_for_label }}">I agree to be contacted about my enquiry and have read the <a href="{% url 'privacy' %}">Privacy Policy</a>.</label>
+        <div class="invalid-feedback">{% if form.consent.errors %}{{ form.consent.errors.0 }}{% else %}Please agree to be contacted so we can respond.{% endif %}</div>
+      </div>
+    </div>
+    <div class="col-12"><button type="submit" class="btn btn-ink w-100" data-submit>Send enquiry</button></div>
+  </div>
+</form>

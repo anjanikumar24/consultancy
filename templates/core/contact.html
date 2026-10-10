@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5">
+  <div class="container-xl">
+    <div class="row g-5">
+      <div class="col-lg-8">{% include "core/_enquiry_form.html" with form_title="Book a consultation" %}</div>
+      <div class="col-lg-4">
+        <aside class="card p-4" aria-label="Contact details">
+          <h2 class="h5 fw-bold">Reach us directly</h2>
+          <ul class="list-unstyled small mt-3">
+            <li class="mb-2"><a class="fw-semibold link-teal" href="tel:{{ site.phone_href }}">{{ site.phone }}</a></li>
+            <li class="mb-2"><a class="fw-semibold link-teal" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+            <li class="mb-2 text-secondary">{{ site.address|linebreaksbr }}</li>
+            {% if site.office_hours %}<li class="mb-2 text-secondary">{{ site.office_hours }}</li>{% endif %}
+          </ul>
+          <a class="btn btn-wa w-100" href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+        </aside>
+        {% if page.body %}<div class="rich mt-3">{{ page.body|safe }}</div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5">
+  <div class="container-xl">
+    {% for d in destinations %}
+    <article id="{{ d.slug }}" class="card p-4 mb-4">
+      <div class="row g-4">
+        <div class="col-md-3">
+          <span class="flag-tile flag-lg" aria-hidden="true">{{ d.flag }}</span>
+          <h2 class="h3 fw-bold mt-3">{{ d.name }}</h2>
+          {% if d.intakes %}<p class="small text-secondary">Typical intakes: {{ d.intakes }}</p>{% endif %}
+        </div>
+        <div class="col-md-9">
+          <p>{{ d.intro }}</p>
+          {% if d.point_list %}<ul class="small text-secondary">{% for p in d.point_list %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+          <a class="btn btn-ink" href="{% url 'contact' %}?country={{ d.name|urlencode }}">Enquire about {{ d.name }}</a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+    {% if page.notice %}<p class="small text-secondary">{{ page.notice }}</p>{% endif %}
+    {% if page.body %}<div class="rich">{{ page.body|safe }}</div>{% endif %}
+  </div>
+</section>
+{% endblock %}

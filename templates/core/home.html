@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  {% include "core/_contours.html" %}
+  <div class="container-xl position-relative py-5 hero-pad">
+    {% if page.eyebrow %}<p class="eyebrow">{{ page.eyebrow }}</p>{% endif %}
+    <h1 class="fw-bold hero-title hero-title-lg">{{ page.hero_title }}</h1>
+    <p class="lead hero-lead">{{ page.hero_text }}</p>
+    <form method="get" action="{% url 'contact' %}" class="pathfinder row g-2" aria-label="Find your pathway">
+      <div class="col-sm-4">
+        <label for="pf-country" class="visually-hidden">Destination country</label>
+        <select id="pf-country" name="country" class="form-select">
+          <option value="">Any destination</option>
+          {% for d in destinations %}<option value="{{ d.name }}">{{ d.name }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="col-sm-5">
+        <label for="pf-level" class="visually-hidden">Study level</label>
+        <select id="pf-level" name="level" class="form-select">
+          <option value="">Any study level</option>
+          {% for value, label in levels %}<option value="{{ value }}">{{ label }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="col-sm-3 d-grid"><button class="btn btn-sun" type="submit">Plan my pathway</button></div>
+    </form>
+    <div class="d-flex flex-wrap gap-2 mt-4">
+      <a href="{% url 'contact' %}" class="btn btn-outline-light">{{ site.cta_label }}</a>
+      <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 py-lg-6">
+  <div class="container-xl">
+    <h2 class="section-title">{{ site.home_destinations_title }}</h2>
+    {% if site.home_destinations_intro %}<p class="text-secondary section-intro">{{ site.home_destinations_intro }}</p>{% endif %}
+    <div class="row g-4 mt-1">
+      {% for d in destinations %}<div class="col-md-6 col-lg-4">{% include "core/_country_card.html" %}</div>{% endfor %}
+    </div>
+    <a href="{% url 'destinations' %}" class="btn btn-ink mt-4">Compare destinations</a>
+  </div>
+</section>
+
+<section class="py-5 py-lg-6 bg-mist">
+  <div class="container-xl">
+    <h2 class="section-title">{{ site.home_services_title }}</h2>
+    {% if site.home_services_intro %}<p class="text-secondary section-intro">{{ site.home_services_intro }}</p>{% endif %}
+    <div class="row g-4 mt-1">
+      {% for s in services %}
+      <div class="col-md-6 col-lg-4"><article class="card h-100 p-4"><h3 class="h5 fw-bold">{{ s.title }}</h3><p class="small text-secondary mb-0">{{ s.text }}</p></article></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="py-5 py-lg-6">
+  <div class="container-xl">
+    <h2 class="section-title">{{ site.home_steps_title }}</h2>
+    <ol class="row g-3 list-unstyled mt-1">
+      {% for s in steps %}
+      <li class="col-md"><div class="card h-100 p-3"><span class="step-no" aria-hidden="true">{{ forloop.counter }}</span><h3 class="h6 fw-bold mt-3">{{ s.title }}</h3><p class="small text-secondary mb-0">{{ s.text }}</p></div></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="py-5 py-lg-6 bg-teal-soft">
+  <div class="container-xl">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-6">
+        <h2 class="section-title">{{ site.home_cta_title }}</h2>
+        <p class="mt-3">{{ site.home_cta_text }}</p>
+      </div>
+      <div class="col-lg-6">{% include "core/_enquiry_form.html" with form_title="Request a call back" compact=True %}</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

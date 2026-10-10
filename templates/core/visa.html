@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5"><div class="container-xl"><div class="rich col-lg-8 px-0">{{ page.body|safe }}</div></div></section>
+{% if documents %}
+<section class="py-5 bg-mist">
+  <div class="container-xl">
+    {% if page.section_title %}<h2 class="section-title">{{ page.section_title }}</h2>{% endif %}
+    {% if page.section_intro %}<p class="text-secondary section-intro">{{ page.section_intro }}</p>{% endif %}
+    <ul class="row g-2 list-unstyled mt-3">
+      {% for d in documents %}<li class="col-sm-6 d-flex gap-2 small"><span class="text-teal" aria-hidden="true">&#10003;</span>{{ d.text }}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+<section class="py-5">
+  <div class="container-xl">
+    {% if page.notice %}<div class="notice col-lg-8"><h2 class="h5 fw-bold">Important</h2><p class="mb-0">{{ page.notice }}</p></div>{% endif %}
+    <a href="{% url 'contact' %}?type=visa" class="btn btn-ink mt-4">Ask about visa support</a>
+  </div>
+</section>
+{% endblock %}

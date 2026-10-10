@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5">
+  <div class="container-xl">
+    {% if page.notice %}<p class="notice col-lg-8">{{ page.notice }}</p>{% endif %}
+    <div class="rich col-lg-8 px-0">{{ page.body|safe }}</div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5"><div class="container-xl"><div class="rich col-lg-8 px-0">{{ page.body|safe }}</div></div></section>
+{% if principles %}
+<section class="py-5 bg-mist">
+  <div class="container-xl">
+    {% if page.section_title %}<h2 class="section-title">{{ page.section_title }}</h2>{% endif %}
+    <div class="row g-4 mt-1">
+      {% for p in principles %}<div class="col-md-6"><article class="card h-100 p-4"><h3 class="h5 fw-bold">{{ p.title }}</h3><p class="small text-secondary mb-0">{{ p.text }}</p></article></div>{% endfor %}
+    </div>
+    <a href="{% url 'contact' %}" class="btn btn-ink mt-4">Speak with us</a>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

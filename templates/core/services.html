@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "core/_hero.html" %}
+<section class="py-5">
+  <div class="container-xl"><div class="row g-4">
+    {% for s in services %}<div class="col-md-6"><article class="card h-100 p-4"><h2 class="h4 fw-bold">{{ s.title }}</h2><p class="text-secondary mb-0">{{ s.text }}</p></article></div>{% endfor %}
+  </div></div>
+</section>
+<section class="py-5 bg-mist">
+  <div class="container-xl">
+    {% if page.section_title %}<h2 class="section-title">{{ page.section_title }}</h2>{% endif %}
+    <ol class="list-unstyled mt-4 col-lg-8 px-0">
+      {% for s in steps %}<li class="d-flex gap-3 mb-3"><span class="step-no flex-shrink-0" aria-hidden="true">{{ forloop.counter }}</span><span><strong>{{ s.title }}.</strong> {{ s.text }}</span></li>{% endfor %}
+    </ol>
+    {% if page.body %}<div class="rich col-lg-8 px-0">{{ page.body|safe }}</div>{% endif %}
+    <a href="{% url 'contact' %}" class="btn btn-ink mt-3">{{ site.cta_label }}</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Thank you | {{ site.site_name }}{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container-xl text-center col-lg-6" role="status">
+    <h1 class="fw-bold">Thank you, we have your enquiry.</h1>
+    <p class="text-secondary">A counsellor will contact you using the details you shared. This is an acknowledgement only and does not guarantee admission or a visa.</p>
+    {% if reference %}<p class="small text-secondary text-break">Reference: {{ reference }}</p>{% endif %}
+    <a class="btn btn-ink" href="{% url 'home' %}">Back to home</a>
+  </div>
+</section>
+{% endblock %}
